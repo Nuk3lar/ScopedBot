@@ -6,10 +6,11 @@ import asyncio
 
 enlistedroles = {'Rank 7 [Leader]', 'Rank 6 [General]', 'Rank 5 [Colonel]', 'Rank 4 [Major]', 'Rank 3 [Sergeant]', 'Rank 2 [Specialist]', 'Rank 1 [Private]'}
 
-version="v0.3"
+version="v0.4"
 						#Defines secret bot token
 with open ("token.txt", "r") as tokenfile:
-    token=tokenfile.readlines()
+    tokenlist = tokenfile.readlines()
+token = " ".join(tokenlist)
 Client = discord.Client()                       # Defining The Bot
 client = commands.Bot(command_prefix = "~~")
 @client.event                                   # On Bot startup sets game and other things
@@ -24,16 +25,15 @@ async def enlist(ctx, *, nickname):		#Bot Enlist Command
         user = ctx.message.author
         role = discord.utils.get(user.server.roles, name="Rank 1 [Private]")
         await client.add_roles(user, role)	#Adds role to user
-        await client.send_message(discord.Object
+        await client.send_message(ctx.message.author, "Thank you for enlisting in the server.\nYou are registered as `"+nickname+"`\nIf you ever with to reenlist please use `~~reenlist`!")
     except:
         await client.send_message(discord.Object(id=426870107504115713),u'\u274C'+' There was a error!')
 @client.event
 async def on_member_join(member):    		# On Member Joining the server
-    print('Member joined server')
-    embed=discord.Embed(title='Welcome to the ToLate Arma3 server!' , description=' To get started, enlist with your Arma3 ign with `~~enlist yourname`', color=0xff8040)
-    embed.set_author(name='Scoped Bot', url='https://github.com/Nuk3lar/ScopedBot',icon_url='https://i.imgur.com/xBxfC7Y.png')
-    embed.set_thumbnail(url='https://i.imgur.com/Tp4p4R6.png')
-    await client.send_message(discord.Object(id=426870107504115713),embed=embed)
+    strmember = str(member)
+    print('[ '+strmember+' ] joined server')
+    fmt = 'Welcome to the ToLate Spec Ops Discord {0.mention}!\nPlease use `~~enlist yourname` to gain access to the rest of the channels.'
+    await client.send_message(discord.Object(id=426870107504115713), fmt.format(member))
 @client.command(pass_context=True)
 @commands.has_role("Rank 7 [Leader]")
 async def inforules(ctx):			#InfoRules, for the info channel
@@ -41,7 +41,7 @@ async def inforules(ctx):			#InfoRules, for the info channel
     embed=discord.Embed(title="Rules", color=0xff8000)
     embed.add_field(name='I', value='Dont be a troll: Nobody likes people who ruins games and other things, so dont be one, or we will come for you.', inline=True)
     embed.add_field(name='II', value='No NSFW shit in here, keep that stuff in your *private* folders.', inline=True)
-    embed.add_field(name='III' , value='No racist shit, swearing to a certian degree is fine, but were not cool with racisim, i will shoot you for that.', inline=True)
+    embed.add_field(name='III' , value="No racist shit, swearing to a certian degree is fine, but we're not cool with racisim, i will shoot you for that.", inline=True)
     embed.add_field(name='IV' , value='In Games, listen to your damn commanders, and dont spam voice chat, cause it actually helps! ', inline=True)
     embed.add_field(name='V' , value='Generally, just use common sense, if a rank 5+ can properly say "yeah, that guy is being a ass" then yes, we will remove you.', inline=True)
     embed.set_footer(text="Generally, just dont be a dick, have fun and be nice enough that people want to stay.")
@@ -76,9 +76,27 @@ async def inforoles(ctx):
 
 @client.command(pass_context=True)
 @commands.has_any_role(*enlistedroles)
-async def reenlist(ctx, *, nickname):           #Bot reEnlist Command, only changes nickname
+async def reenlist(ctx, *, nickname):       #Bot reEnlist Command, only changes nickname
                                          	#Changes nickname
     print("USER re_ENLISTED as "+nickname)
     await client.change_nickname(ctx.message.author, nickname)
+@client.command(pass_context=True)
+@commands.has_role("Rank 7 [Leader]")		#Channel info for the info channel
+async def infochannels(ctx):
+    print('CMD infochannels WAS RAN')
+    embed=discord.Embed(title="Channels ", description="List of channels and what they are used for.", color=0xff8000)
+    embed.add_field(name="Important Category", value="<#425701760263520256> | Contains general info on everything.\n<#425701836909969408> | News, events and more goes here.\n ", inline=True)
+    embed.add_field(name="Arma Channels Category", value="<#425694015216812064> | General, just talk about anything arma.\n<#425702412020350996> | Put any cool screenshots (or even clips) in here! \n<#425702462952046603> | In game support and help.\n<#425702496368066581> | Find a cool server? Post it details in here. ", inline=True)
+    embed.set_footer(text="#enlist, VCs and officer channels are not included here. ")
+    await client.send_message(discord.Object(id=425701760263520256),embed=embed)
+@client.command(pass_context=True)
+@commands.has_role("Rank 7 [Leader]")		#General info for the info channel
+async def infogeneral(ctx):
+    print('CMD infogeneral WAS RAN')
+    embed=discord.Embed(title="General Info ", description="", color=0xff8000)
+    embed.add_field(name="Overview", value="This channel contains most of the info you will need to know about our server, please read before asking for help!", inline=True)
+    embed.add_field(name="Links", value="Discord Invite | https://discord.gg/fCkP7gB\nUnit Link | https://units.arma3.com/unit/tolate\nBot Code, for those interested | https://github.com/Nuk3lar/ScopedBot ", inline=True)
+    embed.set_footer(text="Read on to find out more!")
+    await client.send_message(discord.Object(id=425701760263520256),embed=embed)
 client.run(token)				#Runs the script through the specified bot token
 
