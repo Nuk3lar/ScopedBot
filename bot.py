@@ -1,3 +1,4 @@
+
 import discord                                  # Importing Modules
 from discord.ext.commands import Bot
 from discord.ext import commands
@@ -24,15 +25,13 @@ async def enlist(ctx, *, nickname):		#Bot Enlist Command
         role = discord.utils.get(user.server.roles, name="Rank 1 [Private]")
         await client.add_roles(user, role)	#Adds role to user
         await client.send_message(discord.Object
-
-    
     except:
         await client.send_message(discord.Object(id=426870107504115713),u'\u274C'+' There was a error!')
 @client.event
 async def on_member_join(member):    		# On Member Joining the server
     print('Member joined server')
     embed=discord.Embed(title='Welcome to the ToLate Arma3 server!' , description=' To get started, enlist with your Arma3 ign with `~~enlist yourname`', color=0xff8040)
-    embed.set_author(name='Scoped Bot', url='https://github.com/Nuk3lar',icon_url='https://i.imgur.com/xBxfC7Y.png')
+    embed.set_author(name='Scoped Bot', url='https://github.com/Nuk3lar/ScopedBot',icon_url='https://i.imgur.com/xBxfC7Y.png')
     embed.set_thumbnail(url='https://i.imgur.com/Tp4p4R6.png')
     await client.send_message(discord.Object(id=426870107504115713),embed=embed)
 @client.command(pass_context=True)
@@ -61,7 +60,7 @@ async def rules(ctx):				#Tells user to go to #info for rules
 async def infoheader(ctx):
     print('CMD infoheader WAS RAN')
     embed=discord.Embed(title="To-Late Special Operations Discord server", description="Here you can find most info about the discord server ", color=0xff8000)
-    embed.set_author(name="Nukelar", url="https://github.com/Nuk3lar", icon_url="https://i.imgur.com/xBxfC7Y.png")
+    embed.set_author(name="Nukelar", url="https://github.com/Nuk3lar/ScopedBot", icon_url="https://i.imgur.com/xBxfC7Y.png")
     embed.set_thumbnail(url="https://i.imgur.com/Tp4p4R6.png")
     embed.set_footer(text="Check out the Blocks below for different segments!")
     await client.send_message(discord.Object(id=425701760263520256),embed=embed)
@@ -82,3 +81,4 @@ async def reenlist(ctx, *, nickname):           #Bot reEnlist Command, only chan
     print("USER re_ENLISTED as "+nickname)
     await client.change_nickname(ctx.message.author, nickname)
 client.run(token)				#Runs the script through the specified bot token
+
