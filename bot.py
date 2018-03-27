@@ -7,9 +7,9 @@ from tokenkey import *				#Importing the secret token from token.py
 
 enlistedroles = {'Rank 7 [Leader]', 'Rank 6 [General]', 'Rank 5 [Colonel]', 'Rank 4 [Major]', 'Rank 3 [Sergeant]', 'Rank 2 [Specialist]', 'Rank 1 [Private]'}
 moderatorroles = {'Rank 7 [Leader]', 'Rank 6 [General]', 'Rank 5 [Colonel]', 'Rank 4 [Major]'}
-administratorroles = {'Rank 7 [Leader]', 'Rank 6 [General]'}
+administratorroles = {'Rank 7 [Leader]', 'Rank 6 [General]'}  # Permission System
 
-version="v0.3.1"
+version="v0.3.1" #Version
 						#Defines secret bot token
 Client = discord.Client()                       # Defining The Bot
 client = commands.Bot(command_prefix = "~~")
