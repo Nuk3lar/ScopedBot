@@ -2,3 +2,4 @@ tokenkey.py
 __pycache__/
 token.txt
 *.pyc
+output.log
