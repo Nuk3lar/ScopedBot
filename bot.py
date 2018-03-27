@@ -3,14 +3,14 @@ import discord                                  # Importing Modules
 from discord.ext.commands import Bot
 from discord.ext import commands
 import asyncio
+from tokenkey import *				#Importing the secret token from token.py
 
 enlistedroles = {'Rank 7 [Leader]', 'Rank 6 [General]', 'Rank 5 [Colonel]', 'Rank 4 [Major]', 'Rank 3 [Sergeant]', 'Rank 2 [Specialist]', 'Rank 1 [Private]'}
+moderatorroles = {'Rank 7 [Leader]', 'Rank 6 [General]', 'Rank 5 [Colonel]', 'Rank 4 [Major]'}
+administratorroles = {'Rank 7 [Leader]', 'Rank 6 [General]'}
 
-version="v0.4"
+version="v0.3.1"
 						#Defines secret bot token
-with open ("token.txt", "r") as tokenfile:
-    tokenlist = tokenfile.readlines()
-token = " ".join(tokenlist)
 Client = discord.Client()                       # Defining The Bot
 client = commands.Bot(command_prefix = "~~")
 @client.event                                   # On Bot startup sets game and other things
