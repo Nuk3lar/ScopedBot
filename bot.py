@@ -61,7 +61,7 @@ async def inforules(ctx):			#InfoRules, for the info channel
     embed.set_footer(text="Generally, just dont be a dick, have fun and be nice enough that people want to stay.")
     await client.send_message(discord.Object(id=425701760263520256),embed=embed)
 @client.command(pass_context=True)
-@commands.has_role("Rank 7 [Leader]")
+@commands.has_any_role(*administratorroles)
 async def test(ctx): 				#Nukelar's testing command
     logging.info('cmd test ran by: '+ctx.message.author)
     await client.say("Test "+ctx.message.author.mention)
@@ -113,12 +113,6 @@ async def infogeneral(ctx):
     embed.add_field(name="Links", value="Discord Invite | https://discord.gg/fCkP7gB\nUnit Link | https://units.arma3.com/unit/tolate\nBot Code, for those interested | https://github.com/Nuk3lar/ScopedBot ", inline=True)
     embed.set_footer(text="Read on to find out more!")
     await client.send_message(discord.Object(id=425701760263520256),embed=embed)
-
-@client.event
-async def on_command_error(ctx, error):
-     #Gets the message object
-    logging.error(error) #logs the error
-    await client.send_message(discord.Object(id=428284312526389250), u'\u274C'+' There was a error!')
-
 client.run(token)				#Runs the script through the specified bot token
+
 
