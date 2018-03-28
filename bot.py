@@ -1,4 +1,4 @@
-
+ 
 import discord                                  # Importing Modules
 from discord.ext.commands import Bot
 from discord.ext import commands
@@ -63,7 +63,8 @@ async def inforules(ctx):			#InfoRules, for the info channel
 @client.command(pass_context=True)
 @commands.has_any_role(*administratorroles)
 async def test(ctx): 				#Nukelar's testing command
-    logging.info('cmd test ran by: '+ctx.message.author)
+    authormention = str(ctx.message.author)
+    logging.info('cmd test ran by: '+authormention)
     await client.say("Test "+ctx.message.author.mention)
 @client.command(pass_context=True)
 async def rules(ctx):				#Tells user to go to #info for rules
@@ -113,6 +114,12 @@ async def infogeneral(ctx):
     embed.add_field(name="Links", value="Discord Invite | https://discord.gg/fCkP7gB\nUnit Link | https://units.arma3.com/unit/tolate\nBot Code, for those interested | https://github.com/Nuk3lar/ScopedBot ", inline=True)
     embed.set_footer(text="Read on to find out more!")
     await client.send_message(discord.Object(id=425701760263520256),embed=embed)
+
+@client.event
+async def on_command_error(ctx, error):
+    
+    logging.error(error) #logs the error
+    await client.send_message(discord.Object(id=428284312526389250), u'\u274C'+' There was a error!')
 client.run(token)				#Runs the script through the specified bot token
 
 
