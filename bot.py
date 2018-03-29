@@ -15,7 +15,7 @@ administratorroles = {'Rank 7 [Leader]', 'Rank 6 [General]'}
 #Current error message
 
 
-version="v0.3.2"                                #Version
+version="v0.3.3"                                #Version
 						
 Client = discord.Client()                       # Defining The Bot
 client = commands.Bot(command_prefix = "~~")
@@ -31,7 +31,8 @@ async def on_ready():
 @client.command(pass_context=True)
 async def enlist(ctx, *, nickname):	         	#Bot Enlist Command
                         					    #Changes nickname
-    logging.info('cmd enlist ran by: '+ctx.message.author)
+    author = str(ctx.message.author)
+    logging.info('cmd enlist ran by: '+author)
     await client.change_nickname(ctx.message.author, nickname)
     user = ctx.message.author
     role = discord.utils.get(user.server.roles, name="Rank 1 [Private]")
@@ -51,7 +52,8 @@ async def on_member_remove(member):
 @client.command(pass_context=True)
 @commands.has_role("Rank 7 [Leader]")
 async def inforules(ctx):			#InfoRules, for the info channel
-    logging.info('cmd inforules ran by: '+ctx.message.author)
+    author = str(ctx.message.author)
+    logging.info('cmd inforules ran by: '+author)
     embed=discord.Embed(title="Rules", color=0xff8000)
     embed.add_field(name='I', value='Dont be a troll: Nobody likes people who ruins games and other things, so dont be one, or we will come for you.', inline=True)
     embed.add_field(name='II', value='No NSFW shit in here, keep that stuff in your *private* folders.', inline=True)
@@ -63,17 +65,19 @@ async def inforules(ctx):			#InfoRules, for the info channel
 @client.command(pass_context=True)
 @commands.has_any_role(*administratorroles)
 async def test(ctx): 				#Nukelar's testing command
-    authormention = str(ctx.message.author)
-    logging.info('cmd test ran by: '+authormention)
+    author = str(ctx.message.author)
+    logging.info('cmd test ran by: '+author)
     await client.say("Test "+ctx.message.author.mention)
 @client.command(pass_context=True)
 async def rules(ctx):				#Tells user to go to #info for rules
-    logging.info('cmd rules ran by: '+ctx.message.author)
+    author = str(ctx.message.author)
+    logging.info('cmd rules ran by: '+author)
     await client.say(ctx.message.author.mention+" go to <#425701792790216714> for info about the rules!")
 @client.command(pass_context=True)
 @commands.has_role("Rank 7 [Leader]")		#Header for the info page
 async def infoheader(ctx):
-    logging.info('cmd infoheader ran by: '+ctx.message.author)
+    author = str(ctx.message.author)
+    logging.info('cmd infoheader ran by: '+author)
     embed=discord.Embed(title="To-Late Special Operations Discord server", description="Here you can find most info about the discord server ", color=0xff8000)
     embed.set_author(name="Nukelar", url="https://github.com/Nuk3lar/ScopedBot", icon_url="https://i.imgur.com/xBxfC7Y.png")
     embed.set_thumbnail(url="https://i.imgur.com/Tp4p4R6.png")
@@ -82,7 +86,8 @@ async def infoheader(ctx):
 @client.command(pass_context=True)
 @commands.has_role("Rank 7 [Leader]")		#Role info for the info page
 async def inforoles(ctx):
-    logging.info('cmd inforoles ran by: '+ctx.message.author)
+    author = str(ctx.message.author)
+    logging.info('cmd inforoles ran by: '+author)
     embed=discord.Embed(title="Roles ", description="Here is a complete reference for all the roles in the server", color=0xff8000)
     embed.add_field(name="Executive Officers", value="<@&425699779931275274> | Unit leader, final say in anything.\n<@&425699841587281932> | Generals, Only the Leader can overpower theese guys.\n ", inline=True)
     embed.add_field(name="Officers", value="<@&425700147960217600> | Colonel, Top ranked officer below general.\n<@&425700298082877440> | Major, theese players know their stuff \n", inline=True)
@@ -91,15 +96,19 @@ async def inforoles(ctx):
 
 @client.command(pass_context=True)
 @commands.has_any_role(*enlistedroles)
+@commands.cooldown(1, 604800, commands.BucketType.user)
 async def reenlist(ctx, *, nickname):       #Bot reEnlist Command, only changes nickname
                                          	#Changes nickname
-    logging.info('cmd reenlist ran by: '+ctx.message.author)
-    logging.info(ctx.message.author+' re-enlisted as: '+nickname)
+    author = str(ctx.message.author)
+    logging.info('cmd reenlist ran by: '+author)
+    logging.info(author+' re-enlisted as: '+nickname)
     await client.change_nickname(ctx.message.author, nickname)
+    await client.send_message(ctx.message.channel, "You have re-enlsited as: `"+nickname+"`\nKeep in mind, you can only do this once a week!")
 @client.command(pass_context=True)
 @commands.has_role("Rank 7 [Leader]")		#Channel info for the info channel
 async def infochannels(ctx):
-    logging.info('cmd infochannels ran by: '+ctx.message.author)
+    author = str(ctx.message.author)
+    logging.info('cmd infochannels ran by: '+author)
     embed=discord.Embed(title="Channels ", description="List of channels and what they are used for.", color=0xff8000)
     embed.add_field(name="Important Category", value="<#425701760263520256> | Contains general info on everything.\n<#425701836909969408> | News, events and more goes here.\n<#428284360962211840> | ModLog, warns, bans and kicks are logged here. ", inline=True)
     embed.add_field(name="Arma Channels Category", value="<#425694015216812064> | General, just talk about anything arma.\n<#425702412020350996> | Put any cool screenshots (or even clips) in here! \n<#425702462952046603> | In game support and help.\n<#425702496368066581> | Find a cool server? Post it details in here.\n<#428284312526389250> | Bot Commands in here and only in here... ", inline=True)
@@ -108,18 +117,19 @@ async def infochannels(ctx):
 @client.command(pass_context=True)
 @commands.has_role("Rank 7 [Leader]")		#General info for the info channel
 async def infogeneral(ctx):
-    logging.info('cmd infogeneral ran by: '+ctx.message.author)
+    author = str(ctx.message.author)
+    logging.info('cmd infogeneral ran by: '+author)
     embed=discord.Embed(title="General Info ", description="", color=0xff8000)
     embed.add_field(name="Overview", value="This channel contains most of the info you will need to know about our server, please read before asking for help!", inline=True)
     embed.add_field(name="Links", value="Discord Invite | https://discord.gg/fCkP7gB\nUnit Link | https://units.arma3.com/unit/tolate\nBot Code, for those interested | https://github.com/Nuk3lar/ScopedBot ", inline=True)
     embed.set_footer(text="Read on to find out more!")
     await client.send_message(discord.Object(id=425701760263520256),embed=embed)
-
 @client.event
 async def on_command_error(ctx, error):
-    
     logging.error(error) #logs the error
     await client.send_message(discord.Object(id=428284312526389250), u'\u274C'+' There was a error!')
+
+
 client.run(token)				#Runs the script through the specified bot token
 
 
