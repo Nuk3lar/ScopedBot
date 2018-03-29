@@ -15,7 +15,7 @@ administratorroles = {'Rank 7 [Leader]', 'Rank 6 [General]'}
 #Current error message
 
 
-version="v0.3.3"                                #Version
+version="v0.3.4"                                #Version
 						
 Client = discord.Client()                       # Defining The Bot
 client = commands.Bot(command_prefix = "~~")
@@ -72,7 +72,7 @@ async def test(ctx): 				#Nukelar's testing command
 async def rules(ctx):				#Tells user to go to #info for rules
     author = str(ctx.message.author)
     logging.info('cmd rules ran by: '+author)
-    await client.say(ctx.message.author.mention+" go to <#425701792790216714> for info about the rules!")
+    await client.say(ctx.message.author.mention+" go to <#425701760263520256> for info about the rules!")
 @client.command(pass_context=True)
 @commands.has_role("Rank 7 [Leader]")		#Header for the info page
 async def infoheader(ctx):
@@ -127,9 +127,13 @@ async def infogeneral(ctx):
 @client.event
 async def on_command_error(ctx, error):
     logging.error(error) #logs the error
-    await client.send_message(discord.Object(id=428284312526389250), u'\u274C'+' There was a error!')
+    embed=discord.Embed(title=u'\u274C There was a error!', description="Please check from the list of possible errors! ", color=0xb20000)
+    embed.add_field(name="Make sure you input a **actual** command!", value="This includes capitalisation", inline=True)
+    embed.add_field(name="Have you entered all the variables?", value="Try ~~help!", inline=True)
+    embed.add_field(name="If you continue to experience problems, please raise a issue at", value="https://github.com/Nuk3lar/ScopedBot/issues", inline=True)
+    await client.send_message(discord.Object(id=428284312526389250),embed=embed)
+
+    
 
 
 client.run(token)				#Runs the script through the specified bot token
-
-
