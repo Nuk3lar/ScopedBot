@@ -4,3 +4,4 @@ token.txt
 *.pyc
 output.log
 .viscode
+botold.py
