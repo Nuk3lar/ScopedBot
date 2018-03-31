@@ -9,7 +9,7 @@ from discord.ext import commands
 from core.tokenkey import token
 
 # Defines the version
-version="v0.3.7"
+version="v0.3.8"
 
 # Formats the logging template
 logging.basicConfig(filename='output.log', filemode='w', level=logging.INFO, format='%(asctime)s:%(levelname)s:%(message)s')

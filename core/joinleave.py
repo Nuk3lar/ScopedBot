@@ -18,6 +18,9 @@ class joinleave:
         strmember = str(member)
         logging.info('[ '+strmember+' ] Joined the server')
         channel = self.bot.get_channel(426870107504115713)
+        user = member
+        role = discord.utils.get(user.guild.roles, id=429694539851366421)
+        await member.add_roles(role)
         await channel.send('Welcome to the ToLate Spec Ops Discord '+member.mention+'!\nPlease use `~~enlist yourname` to gain access to the rest of the channels.')
     @bot.event
     async def on_member_remove(self, member: discord.Member):       # On member Leaving server

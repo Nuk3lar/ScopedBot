@@ -1,3 +1,4 @@
+unenlistedroles = {'Un-Enlisted'}
 enlistedroles = {'Rank 7 [Leader]',
                  'Rank 6 [General]',
                  'Rank 5 [Colonel]', 
