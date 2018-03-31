@@ -16,8 +16,9 @@ class enlistcmds:
     async def enlist(self, message, *, nickname: str):	         	#Bot Enlist Command
                         					    #Changes nickname
         member = message.author
-        author = str(member)
-        logging.info('cmd enlist ran by: '+author)
+        memberidint = member.id
+        memberid = str(memberidint)
+        logging.info('cmd enlist ran by user ID: '+memberid)
         await member.edit(nick=nickname)
         user = member
         roleadd = discord.utils.get(user.guild.roles, id=425700965123883025)
@@ -30,15 +31,16 @@ class enlistcmds:
         embed.set_thumbnail(url='https://i.imgur.com/Tp4p4R6.png')
         embed.add_field(name='You can use command reenlist to change your nickname.', value='Example: `~~reenlist yourname`', inline=True)
         await channel.send(embed=embed)
-        logging.info(f'User {author} enlisted as ')
+        logging.info('User ID: '+memberid+' enlisted as: '+nickname)
 
     @commands.command()
     @commands.has_any_role(*enlistedroles)
     async def reenlist(self, message, *, nickname: str):       #Bot reEnlist Command, only changes nickname
                                          	#Changes nickname
         member = message.author
-        author = str(member)
-        logging.info('cmd reenlist ran by: '+author)
+        memberidint = member.id
+        memberid = str(memberidint)
+        logging.info('cmd enlist ran by user ID: '+memberid)
         await member.edit(nick=nickname)
         await member.create_dm()      #Makes a DM with user
         channel = member.dm_channel         #Sets channel var
@@ -46,7 +48,7 @@ class enlistcmds:
         embed.set_thumbnail(url='https://i.imgur.com/Tp4p4R6.png')
         embed.add_field(name='You can use command reenlist to change your nickname.', value='Example: `~~reenlist yourname`', inline=True)
         await channel.send(embed=embed)
-        logging.info(f'User {author} enlisted as ')
+        logging.info('User ID: '+memberid+' reenlisted as: '+nickname)
 
 def setup(bot):
     bot.add_cog(enlistcmds(bot))
