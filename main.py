@@ -9,18 +9,19 @@ from discord.ext import commands
 from core.tokenkey import token
 
 # Defines the version
-version="v0.3.6"
+version="v0.3.7"
 
 # Formats the logging template
-logging.basicConfig(filename='output.log', filemode='w', level=logging.DEBUG, format='%(asctime)s:%(levelname)s:%(message)s')
+logging.basicConfig(filename='output.log', filemode='w', level=logging.INFO, format='%(asctime)s:%(levelname)s:%(message)s')
 
 # Defines the client and bot prefix
 Client = discord.Client()
 bot = commands.Bot(command_prefix = "~~")
 
 # Defines extentions (files) and loads them into the bot
-initial_extensions = ['usercogs.enlistcmds',
-                      'core.joinleave']
+initial_extensions = ['core.joinleave',
+                      'core.testcmds',
+                      'core.enlistcmds']
 if __name__ == '__main__':
     for extension in initial_extensions:
         try:
@@ -31,10 +32,12 @@ if __name__ == '__main__':
             traceback.print_exc() 
 
 # Process for when the bot starts correctly
+@bot.event
 async def on_ready():
-    print("SCOPED "+version+" STARTED")
+    print("\n\nSCOPED "+version+" STARTED")
     logging.info("SCOPED "+version+" STARTED")
-    await bot.change_presence(game=discord.Game(name="~~help", type=3))
+    await bot.change_presence(activity=discord.Activity(name='~~help', type=3, afk=True))
+
 
 # Runs the bot in the defined token
 bot.run(token, bot=True, reconnect=True)

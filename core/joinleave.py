@@ -14,16 +14,16 @@ class joinleave:
 
     
     @bot.event
-    async def on_member_join(self, member):    		# On Member Joining the server
+    async def on_member_join(self, member: discord.Member):    		# On Member Joining the server
         strmember = str(member)
-        print('[ '+strmember+' ] joined server')
-        fmt = 'Welcome to the ToLate Spec Ops Discord {0.mention}!\nPlease use `~~enlist yourname` to gain access to the rest of the channels.'
-        await bot.send_message(discord.Object(id=426870107504115713), fmt.format(member))
+        logging.info('[ '+strmember+' ] Joined the server')
+        channel = self.bot.get_channel(426870107504115713)
+        await channel.send('Welcome to the ToLate Spec Ops Discord '+member.mention+'!\nPlease use `~~enlist yourname` to gain access to the rest of the channels.')
     @bot.event
-    async def on_member_remove(self, member):       # On member Leaving server
+    async def on_member_remove(self, member: discord.Member):       # On member Leaving server
         strmember = str(member)
-        logging.info('[ '+strmember+' } was kicked, banned or left the server')
+        logging.info('[ '+strmember+' ] was kicked, banned or left the server')
 
 # Sets the cog up
 def setup(bot):
-    bot.add_cog(joinleave)
+    bot.add_cog(joinleave(bot))
