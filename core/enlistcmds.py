@@ -18,7 +18,7 @@ class enlistcmds:
         member = message.author
         memberidint = member.id
         memberid = str(memberidint)
-        logging.info('cmd enlist ran by user ID: '+memberid)
+        logging.info('CMD ~~enlist ran by user ID: '+memberid)
         await member.edit(nick=nickname)
         user = member
         roleadd = discord.utils.get(user.guild.roles, id=425700965123883025)
@@ -40,7 +40,7 @@ class enlistcmds:
         member = message.author
         memberidint = member.id
         memberid = str(memberidint)
-        logging.info('cmd enlist ran by user ID: '+memberid)
+        logging.info('CMD ~~enlist ran by user ID: '+memberid)
         await member.edit(nick=nickname)
         await member.create_dm()      #Makes a DM with user
         channel = member.dm_channel         #Sets channel var

@@ -2,8 +2,10 @@ import discord
 import logging
 from discord.ext import commands
 
+Client = discord.Client()
+bot = commands.Bot(command_prefix = '~~')
 # Defines the test cog
-class Testcmds:
+class TestCMDs:
     def __init__(self, bot):
         self.bot = bot
     @commands.command(name='repeat', aliases=['copy', 'mimic'])
@@ -13,4 +15,4 @@ class Testcmds:
 
         await self.bot.say(our_input+" "+member.mention)
 def setup(bot):
-    bot.add_cog(Testcmds(bot))
+    bot.add_cog(TestCMDs(bot))

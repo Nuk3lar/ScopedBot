@@ -21,7 +21,8 @@ bot = commands.Bot(command_prefix = "~~")
 # Defines extentions (files) and loads them into the bot
 initial_extensions = ['core.joinleave',
                       'core.testcmds',
-                      'core.enlistcmds']
+                      'core.enlistcmds',
+                      'core.infocmds']
 if __name__ == '__main__':
     for extension in initial_extensions:
         try:
