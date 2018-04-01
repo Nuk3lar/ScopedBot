@@ -4,7 +4,6 @@ from discord.ext import commands
 from core.perms import enlistedroles, unenlistedroles
 
 Client = discord.Client()
-bot = commands.Bot(command_prefix = '~~')
 
 class enlistcmds:
 
@@ -13,6 +12,7 @@ class enlistcmds:
 
     @commands.command()
     @commands.has_any_role(*unenlistedroles)
+    @commands.guild_only()
     async def enlist(self, message, *, nickname: str):	         	#Bot Enlist Command
                         					    #Changes nickname
         member = message.author
@@ -35,6 +35,7 @@ class enlistcmds:
 
     @commands.command()
     @commands.has_any_role(*enlistedroles)
+    @commands.guild_only()
     async def reenlist(self, message, *, nickname: str):       #Bot reEnlist Command, only changes nickname
                                          	#Changes nickname
         member = message.author

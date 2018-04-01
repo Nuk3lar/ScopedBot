@@ -3,7 +3,6 @@ import logging
 from discord.ext import commands
 
 Client = discord.Client()
-bot = commands.Bot(command_prefix = '~~')
 # Defines the test cog
 class TestCMDs:
     def __init__(self, bot):

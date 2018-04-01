@@ -5,7 +5,6 @@ from discord.ext import commands
 from core.perms import administratorroles
 
 Client = discord.Client()
-bot = commands.Bot(command_prefix = '~~')
 
 class InfoCMDs:
     def __init__(self, bot):
@@ -19,6 +18,7 @@ class InfoCMDs:
     
     @commands.command()
     @commands.has_any_role(*administratorroles)
+    @commands.guild_only()
     async def infoadm(self, message, *, part: str):
         member = message.author
         memberidint = member.id
