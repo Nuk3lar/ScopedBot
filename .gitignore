@@ -2,6 +2,7 @@ tokenkey.py
 __pycache__/
 token.txt
 *.pyc
-output.log
+*.log
 .viscode
 botold.py
+logs/

@@ -3,16 +3,18 @@
 # Github link: https://github.com/Nuk3lar
 
 # Imports Modules 
-import discord, sys, asyncio, logging, traceback     
+import discord, sys, asyncio, logging, traceback, datetime
+from time import gmtime, strftime
+
 from discord.ext.commands import Bot
 from discord.ext import commands
 from core.config import token, Client, bot, initial_extensions
 
 # Defines the version
 version="v0.7"
-
+outtime = strftime("%Y-%m-%d %H:%M", gmtime())
 # Formats the logging template
-logging.basicConfig(filename='output.log', filemode='w', level=logging.INFO, format='%(asctime)s:%(levelname)s:%(message)s')
+logging.basicConfig(filename='logs\\LOG '+outtime+' output.log', filemode='w', level=logging.INFO, format='%(asctime)s:%(levelname)s:%(message)s')
 
 
                       
