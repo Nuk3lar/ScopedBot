@@ -6,24 +6,16 @@
 import discord, sys, asyncio, logging, traceback     
 from discord.ext.commands import Bot
 from discord.ext import commands
-from core.tokenkey import token
+from core.config import token, Client, bot, initial_extensions
 
 # Defines the version
-version="v0.6"
+version="v0.7"
 
 # Formats the logging template
 logging.basicConfig(filename='output.log', filemode='w', level=logging.INFO, format='%(asctime)s:%(levelname)s:%(message)s')
 
-# Defines the client and bot prefix
-Client = discord.Client()
-bot = commands.Bot(command_prefix = "~~")
 
-# Defines extentions (files) and loads them into the bot
-initial_extensions = ['core.joinleave',
-                      'core.testcmds',
-                      'core.enlistcmds',
-                      'core.infocmds',
-                      'core.errors']
+                      
 if __name__ == '__main__':
     for extension in initial_extensions:
         try:

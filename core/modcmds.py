@@ -1,10 +1,7 @@
-# Imports all the modules
-import discord, sys, asyncio, logging, traceback     
+import discord, sys, asyncio, logging                                  # Importing Modules
 from discord.ext.commands import Bot
 from discord.ext import commands
-from core.perms import administratorroles
-
-Client = discord.Client()
+from core.config import Client, bot, administratorroles, moderatorroles
 
 class InfoCMDs:
     def __init__(self, bot):
