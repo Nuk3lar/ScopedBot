@@ -101,6 +101,8 @@ class management:
         channel = member.dm_channel
         await channel.send('', embed=embed)
         await member.ban(reason=reason, delete_message_days=0)  
+    
+
 
 
 def setup(bot):

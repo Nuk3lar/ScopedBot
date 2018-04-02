@@ -8,6 +8,7 @@ from discord.ext.commands import Bot
 from discord.ext import commands
 from core.config import token, Client, bot, initial_extensions
 
+
 # Defines the version
 version="v0.7"
 # Formats the logging template
