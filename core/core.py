@@ -3,7 +3,7 @@ import discord, sys, asyncio, logging, traceback
 from discord.ext.commands import Bot
 from discord.ext import commands
 from core.config import Client, bot
-
+Client = discord.Client()
 # Join leave cog
 class joinleave:
     
@@ -11,7 +11,7 @@ class joinleave:
         self.bot = bot
 
     
-    @bot.event
+    @Client.event
     async def on_member_join(self, member: discord.Member):    		# On Member Joining the server
         memberidint = member.id
         memberid = str(memberidint)
@@ -21,7 +21,7 @@ class joinleave:
         role = discord.utils.get(user.guild.roles, id=429694539851366421)
         await member.add_roles(role)
         await channel.send('Welcome to the ToLate Spec Ops Discord '+member.mention+'!\nPlease use `~~enlist yourname` to gain access to the rest of the channels.')
-    @bot.event
+    @Client.event
     async def on_member_remove(self, member: discord.Member):       # On member Leaving server
         memberidint = member.id
         memberid = str(memberidint)

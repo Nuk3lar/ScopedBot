@@ -1,8 +1,4 @@
 tokenkey.py
 __pycache__/
-token.txt
-*.pyc
-*.log
-.viscode
-botold.py
-logs/
+.vscode
+output.log

@@ -56,5 +56,28 @@ class InfoCMDs:
             embed.add_field(name="Enlisted Soldiers", value="<@&425700355964272642> | Sergeant, skilled soldiers, on their way to officer status.\n<@&425700898124201984> | Specalist, theese players have been promoted due to either respect, or skill.\n<@&425700965123883025> | Enlisted, most people in the server.", inline=True)
             embed.add_field(name="Unenlisted People", value="<@&429694539851366421> | Un-Enlisted people, they haven't even enlisted yet.", inline=True)
             await channel.send('', embed=embed)
+class management:
+    def __init__(self, bot):
+        self.bot = bot
+    @commands.has_any_role(*moderatorroles)
+    @commands.command()
+    async def kick(self, message, member: discord.Member, *, reason: str):
+        strmember = str(member)
+        strauthor = str(message.author)
+        channel = self.bot.get_channel(428284360962211840)
+        embed=discord.Embed(title=u'\u26D4'+' User '+strmember+' was kicked by '+strauthor, description='\nReason: '+reason, color=0xff0000)
+        await channel.send(embed=embed)
+        intauthorid = message.author.id
+        authorid = str(intauthorid)
+
+        logging.info('CMD ~~kick ran by User ID: '+authorid)
+        kickedIDint = member.id
+        kickedid = str(kickedIDint)
+        logging.info('User ID: '+kickedid+' was kicked for: '+reason+' by User ID: '+authorid)
+        await member.kick()
+        
+
+
 def setup(bot):
     bot.add_cog(InfoCMDs(bot))
+    bot.add_cog(management(bot))
