@@ -56,6 +56,10 @@ class InfoCMDs:
             embed.add_field(name="Enlisted Soldiers", value="<@&425700355964272642> | Sergeant, skilled soldiers, on their way to officer status.\n<@&425700898124201984> | Specalist, theese players have been promoted due to either respect, or skill.\n<@&425700965123883025> | Enlisted, most people in the server.", inline=True)
             embed.add_field(name="Unenlisted People", value="<@&429694539851366421> | Un-Enlisted people, they haven't even enlisted yet.", inline=True)
             await channel.send('', embed=embed)
+        else:
+            embed=discord.Embed(title=u"\u274C Not a actual part", description="Parts are: header, general, rules, channels, roles", color=0xb20000)
+            channel = message.channel
+            await channel.send('', embed=embed)
 class management:
     def __init__(self, bot):
         self.bot = bot
@@ -69,13 +73,34 @@ class management:
         await channel.send(embed=embed)
         intauthorid = message.author.id
         authorid = str(intauthorid)
-
         logging.info('CMD ~~kick ran by User ID: '+authorid)
         kickedIDint = member.id
         kickedid = str(kickedIDint)
         logging.info('User ID: '+kickedid+' was kicked for: '+reason+' by User ID: '+authorid)
-        await member.kick()
-        
+        embed=discord.Embed(title=u'\u26D4'+' You were kicked by '+strauthor, description='\nReason: '+reason, color=0xff0000)
+        await member.create_dm()      #Makes a DM with user
+        channel = member.dm_channel
+        await channel.send('', embed=embed)
+        await member.kick(reason=reason)
+    @commands.has_any_role(*administratorroles)
+    @commands.command()
+    async def ban(self, message, member: discord.Member, *, reason: str):
+        strmember = str(member)
+        strauthor = str(message.author)
+        channel = self.bot.get_channel(428284360962211840)
+        embed=discord.Embed(title=u'\u26D4'+' User '+strmember+' was BANNED by '+strauthor, description='\nReason: '+reason, color=0xff0000)
+        await channel.send(embed=embed)
+        intauthorid = message.author.id
+        authorid = str(intauthorid)
+        logging.info('CMD ~~ban ran by User ID: '+authorid)
+        bannedIDint = member.id
+        bannedid = str(bannedIDint)
+        logging.info('User ID: '+bannedid+' was BANNED for: '+reason+' by User ID: '+authorid)
+        embed=discord.Embed(title=u'\u26D4'+' You were BANNED by '+strauthor, description='\nReason: '+reason, color=0xff0000)
+        await member.create_dm()      #Makes a DM with user
+        channel = member.dm_channel
+        await channel.send('', embed=embed)
+        await member.ban(reason=reason, delete_message_days=0)  
 
 
 def setup(bot):
